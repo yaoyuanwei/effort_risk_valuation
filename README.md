@@ -7,7 +7,7 @@ This repository contains the data analysis code associated the preprint:
 
 Please get in touch with me: yywyao(at)gmail.com
 
-# Author
+# Authors
 
 * Yuan-Wei Yao, University Medical Center Hamburg-Eppendorf
 * Rasmus Bruckner, Freie Universität Berlin
