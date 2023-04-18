@@ -61,4 +61,32 @@ write.csv(bestfit_e,'edt_fit_power.csv')
 bestfit_r <- fit_r_power$allIndPars
 write.csv(bestfit_r,'rdt_fit_power.csv')
 
+# compare power2 models with same or different k and p across tasks
+# combine data of the 2 tasks
+dat_edt2 = rename(dat_edt, cost_e = cost_one, cost_r = cost_two)
+dat_rdt2 = rename(dat_rdt, cost_r = cost_one, cost_e = cost_two)
+
+dat_comb = rbind(dat_edt2,dat_rdt2)
+dat_comb = 
+  dat_comb %>% relocate(cost_r, .after = cost_e)
+
+source("hBayesDM_edt2.R")
+# same k and p
+source("edt_power21.R")
+fit_c_power21 <- edt_power21(data = dat_comb, niter=3000, nwarmup=1000, nchain=4, ncore=4)
+# different k and same p
+source("edt_power22.R")
+fit_c_power22 <- edt_power22(data = dat_comb, niter=3000, nwarmup=1000, nchain=4, ncore=4)
+# same k and different p
+source("edt_power23.R")
+fit_c_power23 <- edt_power23(data = dat_comb, niter=3000, nwarmup=1000, nchain=4, ncore=4)
+# different k and p
+source("edt_power24.R")
+fit_c_power24 <- edt_power24(data = dat_comb, niter=3000, nwarmup=1000, nchain=4, ncore=4)
+
+printFit(fit_c_power21, fit_c_power22, fit_c_power23, fit_c_power24)
+
+
+
+
 
