@@ -79,7 +79,7 @@ source("egt_sigm.R")
 fit_e_sigm <- egt_sigm(data = dat_egt, niter=3000, nwarmup=1000, nchain=4, ncore=4)
 
 # model comparison based on LOOIC
-printFit(fit_e_linear, fit_e_hyper, fit_e_parab, fit_e_power, fit_e_sigm1, fit_e_cpt)
+printFit(fit_e_linear, fit_e_hyper, fit_e_parab, fit_e_power, fit_e_sigm)
 
 # Models for risky decision-making
 # Cumulative prospect theory
@@ -91,7 +91,7 @@ source("egt_pt.R")
 fit_r_pt <- egt_pt(data = dat_rgt, niter=3000, nwarmup=1000, nchain=4, ncore=4)
 
 # Model comparison based on LOOIC
-printFit(fit_r_linear, fit_r_hyper, fit_r_parab, fit_r_power, fit_r_sigm1, fit_r_cpt)
+printFit(fit_r_cpt, fit_r_pt)
 
 # Save the fitted values for model-based fMRI
 # 2-parameter model for effort-based decision-making
