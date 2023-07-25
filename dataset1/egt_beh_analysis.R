@@ -78,7 +78,7 @@ fit_e_power <- egt_power(data = dat_egt, niter=3000, nwarmup=1000, nchain=4, nco
 source("egt_sigm.R")
 fit_e_sigm <- egt_sigm(data = dat_egt, niter=3000, nwarmup=1000, nchain=4, ncore=4)
 
-# model comparison based on LOOIC
+# Model comparison based on LOOIC
 printFit(fit_e_linear, fit_e_hyper, fit_e_parab, fit_e_power, fit_e_sigm)
 
 # Models for risky decision-making
