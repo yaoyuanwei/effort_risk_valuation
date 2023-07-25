@@ -8,12 +8,16 @@ setwd("~/Desktop/project/Effort_risk/analyses")
 
 # Read effort task
 dat_edt <- read.csv(file = 'Data_EDT_DVD.csv')
+# exclude NA
+dat_edt <- dat_edt[!is.na(dat_edt$choice_rt),]
 # select useful variables
 dat_edt <- dat_edt[c("subjID","trial","cost_one","amount_one",
                      "cost_two","amount_two","choice")]
 
 # Read risk task
 dat_rdt <- read.csv(file = 'Data_RDT_DVD.csv')
+# exclude NA
+dat_rdt <- dat_rdt[!is.na(dat_rdt$choice_rt),]
 # select useful variables
 dat_rdt <- dat_rdt[c("subjID","trial","cost_one","amount_one",
                      "cost_two","amount_two","choice")]
