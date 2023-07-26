@@ -1,3 +1,4 @@
+# Set parameters for the hyperbolic discounting model
 
 egt_hyper <- hBayesDM_egt(
   task_name       = "egt",
