@@ -1,3 +1,4 @@
+# Set parameters for the hyperbolic discounting model
 
 edt_hyper <- hBayesDM_edt(
   task_name       = "edt",
