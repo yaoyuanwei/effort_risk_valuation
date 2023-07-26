@@ -1,3 +1,5 @@
+# Set parameters for the cumulative prospect theory
+
 egt_cpt <- hBayesDM_egt(
   task_name       = "egt",
   model_name      = "cpt",
