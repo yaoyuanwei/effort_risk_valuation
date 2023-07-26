@@ -1,3 +1,4 @@
+# Set parameters for the parabolic discounting model
 
 egt_parab <- hBayesDM_egt(
   task_name       = "egt",
