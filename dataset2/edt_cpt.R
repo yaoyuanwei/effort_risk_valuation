@@ -1,3 +1,4 @@
+# Set parameters for the cumulative prospect theory
 
 edt_cpt <- hBayesDM_edt(
   task_name       = "edt",
