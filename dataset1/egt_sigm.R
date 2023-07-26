@@ -1,3 +1,4 @@
+# Set parameters for the sigmoidal discounting model
 
 egt_sigm <- hBayesDM_egt(
   task_name       = "egt",
