@@ -1,3 +1,4 @@
+# Set parameters for the two-parameter power discounting model
 
 egt_power <- hBayesDM_egt(
   task_name       = "egt",
