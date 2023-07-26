@@ -1,3 +1,4 @@
+# Set parameters for the linear discounting model
 
 egt_linear <- hBayesDM_egt(
   task_name       = "egt",
