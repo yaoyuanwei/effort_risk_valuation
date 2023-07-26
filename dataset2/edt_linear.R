@@ -1,3 +1,4 @@
+# Set parameters for the linear discounting model
 
 edt_linear <- hBayesDM_edt(
   task_name       = "edt",
