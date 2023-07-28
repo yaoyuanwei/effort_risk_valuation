@@ -1,16 +1,26 @@
-% Function to run multivariate decoding and then smooth the decoding maps
-% Modified based on the TDT template
-% TDT toolbox is required
-% Author: Yuanwei Yao
-% Date: July 23, 2023
-
 function [source_file, dest_file] = run_decoding(task_name, anal_fold, sub_fold, labelname1, labelname2, si)
+% Run decoding analysis: July 23, 2023, by Yuanwei Yao
+%
+% This function is used to run multivariate decoding analysis and then smooth the decoding map
+% It is mainly modified based on the TDT template from the TDT toolbox 
+%
+% Input:
+%   task_name:  	Name of the task for analysis, e.g., 'edt'
+%   anal_fold:  	Name of the main fMRI analysis folder
+%   sub_fold:   	Name of the subject folder
+%   labelname1:  	Name of the first lable, e.g., 'high_value'
+% 	labelname2:  	Name of the second lable, e.g., 'low_value'
+%   si:         	Subject numeric id (e.g., 20)
+%
+% Output:
+%   source_file:    Original decoding image(s) that we want to copy
+%   dest_file:      Renamed decoding image(s) that we want to copy to a specific folder 	
     
     %% Decoding analysis
     clear cfg
     clear results
 
-    % model name
+    % Model name
     model_i     = [task_name, '_model_sv'];
 
 	% Set defaults
@@ -63,23 +73,37 @@ function [source_file, dest_file] = run_decoding(task_name, anal_fold, sub_fold,
 	%% Smoothing: 6mm
 	matlabbatch = {};
 	load([anal_fold, '/spm_model/spm_smooth6.mat']);
-	% select decoding maps
+
+	% Name of the unsmoothed decoding image
 	decode_maps  = {'res_accuracy_minus_chance.nii'};
+
+	% Get the full path of the unsmoothed decoding image
 	us_img   = spm_select('FPListRec', output_dir, decode_maps);
+
+	% add it to spm and run smoothing
 	matlabbatch{1, 1}.spm.spatial.smooth.data = cellstr(us_img);
 	spm_jobman('run', matlabbatch);
 
 	%% Copy decoding maps
+	% Create a folder to store the smoothed file
 	dest_dir   	= fullfile(anal_fold, 'stats', [model_i, '_decode'], 'smoothed');
 	if ~exist(dest_dir,'dir')
 	    mkdir(dest_dir);
 	end
 
+	% Name of the smoothed decoding image
 	sm_maps  		= {'sres_accuracy_minus_chance.nii'};
-	source_file     = spm_select('FPList', output_dir, sm_maps{1});
-    [~,name,ext]    = fileparts(sm_maps{1});
-    dest_file_name  = sprintf('%s_%s%s', name, ['Sub', int2str(si)], ext); % sres_AUC_minus_chance_Sub19.nii
-    dest_file       = fullfile(dest_dir, dest_file_name);
 
+	% Use spm_select to get the full path of the smoothed image
+	source_file     = spm_select('FPList', output_dir, sm_maps{1});
+
+	% Use fileparts to get the name and and file type (e.g., nii) of the smoothed file
+    [~,name,ext]    = fileparts(sm_maps{1});
+
+    % Specify the modified name of the image: sres_AUC_minus_chance_Sub19.nii
+    dest_file_name  = sprintf('%s_%s%s', name, ['Sub', int2str(si)], ext); 
+
+    % Full path of the renamed image
+    dest_file       = fullfile(dest_dir, dest_file_name);
 
 end
