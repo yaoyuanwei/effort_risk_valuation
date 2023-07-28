@@ -80,7 +80,7 @@ function [source_file, dest_file] = run_decoding(task_name, anal_fold, sub_fold,
 	% Get the full path of the unsmoothed decoding image
 	us_img   = spm_select('FPListRec', output_dir, decode_maps);
 
-	% add it to spm and run smoothing
+	% Add it to spm and run smoothing
 	matlabbatch{1, 1}.spm.spatial.smooth.data = cellstr(us_img);
 	spm_jobman('run', matlabbatch);
 
