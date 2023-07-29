@@ -1,5 +1,6 @@
 function [sub_data, sub_sv] = egt_extract_sub_data(task_name, data_fold, data_all, si, sub_count)
-% extract subject data for dataset 1: July 23, 2023, by Yuanwei Yao
+% EGT_EXTRACT_SUB_DATA: Extract behavioral data and subjective values for effort-based gambling
+% July 23, 2023, by Yuanwei Yao
 %
 % This function is to extract behavioral data and subjective values for a subject
 %

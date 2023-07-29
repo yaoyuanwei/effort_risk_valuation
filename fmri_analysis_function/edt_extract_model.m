@@ -1,10 +1,9 @@
 function [onsets, names, durations, nr_ind] = edt_extract_model(task_name, anal_fold, sub_data, run_n, sub_sv, si)
-% extract the SPM model information for dataset 2: July 23, 2023, by Yuanwei Yao
-% 
-% This function is used to extract events and timing information for SPM for each subject
+% EDT_EXTRACT_MODEL: Extract events and timing information for effort-based decision-making
+% July 23, 2023, by Yuanwei Yao
 %
 % Input:
-%   task_name:  Name of the task for analysis, e.g., 'ddt'
+%   task_name:  Name of the task for analysis, e.g., 'edt'
 %   anal_fold:  Name of the main fMRI analysis folder
 %   sub_data:   Data for a subject
 %   run_n:      Number of runs

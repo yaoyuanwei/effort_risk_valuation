@@ -1,10 +1,9 @@
 function [sub_data, sub_sv] = edt_extract_sub_data(task_name, data_fold, data_all, si, sub_count)
-% extract subject data for dataset 2: July 23, 2023, by Yuanwei Yao
-%
-% This function is to extract behavioral data and subjective values for a subject
+% EDT_EXTRACT_SUB_DATA: Extract behavioral data and subjective values for effort-based decision-making
+% July 23, 2023, by Yuanwei Yao
 %
 % Input:
-%   task_name:  Name of the task for analysis, e.g., 'ddt'
+%   task_name:  Name of the task for analysis, e.g., 'edt'
 %   anal_fold:  Name of the main fMRI analysis folder
 %   data_all:   Data for all subjects
 %   si:         Subject numeric id (e.g., 20)
