@@ -1,8 +1,6 @@
 function [source_file, dest_file] = run_decoding(task_name, anal_fold, sub_fold, labelname1, labelname2, si)
-% Run decoding analysis: July 23, 2023, by Yuanwei Yao
-%
-% This function is used to run multivariate decoding analysis and then smooth the decoding map
-% It is mainly modified based on the TDT template from the TDT toolbox 
+% RUN_DECODING: Run multivariate decoding analysis and then smooth the decoding map
+% July 23, 2023, by Yuanwei Yao 
 %
 % Input:
 %   task_name:  	Name of the task for analysis, e.g., 'edt'
@@ -17,6 +15,7 @@ function [source_file, dest_file] = run_decoding(task_name, anal_fold, sub_fold,
 %   dest_file:      Renamed decoding image(s) that we want to copy to a specific folder 	
     
     %% Decoding analysis
+    % It is mainly modified based on the TDT template from the TDT toolbox
     clear cfg
     clear results
 
