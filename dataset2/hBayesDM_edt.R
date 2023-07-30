@@ -1,5 +1,5 @@
-# hBayesDM Model Function tailored for the two-option cost-benefit decision-making task
-
+# hBayesDM model function tailored for the two-option effort-based decision-making task
+# Modified based on the hBayesDM template
 hBayesDM_edt <- function(task_name,
                            model_name,
                            model_type = "",
@@ -27,10 +27,10 @@ hBayesDM_edt <- function(task_name,
            ...) {
 
     
-    # preprocess function for stan
+    # Preprocess function for stan
     edt_preprocess_func <- function(raw_data, general_info) {
+
       # Currently class(raw_data) == "data.table"
-      
       # Use general_info of raw_data
       subjs   <- general_info$subjs
       n_subj  <- general_info$n_subj
