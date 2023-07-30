@@ -103,7 +103,7 @@ function [sub_data, sub_sv] = egt_extract_sub_data(task_name, data_fold, data_al
             d1i         = fit_p.delta1(sub_count); % elevation of the weighting function for gains
             d2i         = fit_p.delta2(sub_count); % elevation of the weighting function for losses
             
-            % Probabilities are also need to calculate weights
+            % Probabilities are also needed to calculate weights
             p1i         = (1-costi).^gammai; % winning probability
             p2i         = costi.^gammai; % losing probability
             w1i         = (d1i * p1i) ./ (d1i * p1i + p2i); % weights for gains

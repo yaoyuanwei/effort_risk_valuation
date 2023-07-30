@@ -82,7 +82,7 @@ function [sub_data, sub_sv] = edt_extract_sub_data(task_name, data_fold, data_al
             gammai      = fit_p.gamma(sub_count); % curvature of the weighting function
             d1i         = fit_p.delta1(sub_count); % elevation of the weighting function for gains
 
-            % Probabilities are also need to calculate weights
+            % Probabilities are also needed to calculate weights
             p1i         = (1-costi).^gammai; % winning probability
             p2i         = costi.^gammai; % losing probability
             w1i         = (d1i * p1i) ./ (d1i * p1i + p2i); % weights for gains
