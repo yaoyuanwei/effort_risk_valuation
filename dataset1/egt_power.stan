@@ -43,7 +43,7 @@ transformed parameters {
 }
 
 model {
-// Hyperbolic function
+// Two-parameter power function
   // Hyperparameters
   mu_pr  ~ normal(0, 1);
   sigma  ~ normal(0, 0.2);
@@ -61,8 +61,13 @@ model {
     real sv_gamble;
 
     for (t in 1:(Tsubj[i])) {
+      // Cost of the gamble based on the power function
       c_gamble  = k[i]*pow(cost[i, t], p[i]);
+
+      // Subjective value definition
       sv_gamble = pow(gain[i, t], rho[i]) - lambda[i] * pow(loss[i, t], rho[i]) - c_gamble;
+
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * sv_gamble);
     }
   }

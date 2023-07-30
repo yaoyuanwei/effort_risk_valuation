@@ -37,7 +37,7 @@ transformed parameters {
 }
 
 model {
-// Hyperbolic function
+// Prospect theory (PT)
   // Hyperparameters
   mu_pr  ~ normal(0, 1);
   sigma  ~ normal(0, 0.2);
@@ -59,8 +59,12 @@ model {
       p_gain  = (1-cost[i, t]);
       p_loss  = cost[i, t];
       w_gain  = p_gain;
-      w_loss  = p_loss;  
+      w_loss  = p_loss;
+
+      // Subjective value definition  
       sv_gamble  = w_gain * pow(gain[i, t], rho[i]) - w_loss * lambda[i] * pow(loss[i, t], rho[i]);
+
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * (sv_gamble));
     }
   }

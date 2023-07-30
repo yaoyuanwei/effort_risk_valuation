@@ -46,7 +46,7 @@ transformed parameters {
 }
 
 model {
-// Hyperbolic function
+// Cumulative prospect theory (CPT)
   // Hyperparameters
   mu_pr  ~ normal(0, 1);
   sigma  ~ normal(0, 0.2);
@@ -73,7 +73,10 @@ model {
       w_gain  = (delta1[i] * pow(p_gain, gamma[i]))/(delta1[i] * pow(p_gain, gamma[i]) + pow((1-p_gain), gamma[i]));
       w_loss  = (delta2[i] * pow(p_loss, gamma[i]))/(delta2[i] * pow(p_loss, gamma[i]) + pow((1-p_loss), gamma[i]));
       
+      // Subjective value definition
       sv_gamble  = w_gain * pow(gain[i, t], rho[i]) - w_loss * lambda[i] * pow(loss[i, t], rho[i]);
+      
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * (sv_gamble));
     }
   }

@@ -41,7 +41,7 @@ transformed parameters {
 }
 
 model {
-// Hyperbolic function
+// Cumulative prospect theory (CPT)
   // Hyperparameters
   mu_pr  ~ normal(0, 1);
   sigma  ~ normal(0, 0.2);
@@ -66,8 +66,12 @@ model {
       p_two   = (1-cost_two[i, t]);
       w_one   = (delta1[i] * pow(p_one, gamma[i]))/(delta1[i] * pow(p_one, gamma[i]) + pow((1-p_one), gamma[i]));
       w_two   = (delta1[i] * pow(p_two, gamma[i]))/(delta1[i] * pow(p_two, gamma[i]) + pow((1-p_two), gamma[i]));
+
+      // Subjective values of the two options
       sv_one  = w_one * (pow(amount_one[i, t], rho[i]));
       sv_two  = w_two * (pow(amount_two[i, t], rho[i]));
+
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * (sv_one - sv_two));
     }
   }

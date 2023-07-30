@@ -43,7 +43,7 @@ transformed parameters {
 }
 
 model {
-// Hyperbolic function
+// Sigmoidal function
   // Hyperparameters
   mu_pr  ~ normal(0, 1);
   sigma  ~ normal(0, 0.2);
@@ -61,8 +61,13 @@ model {
     real sv_gamble;
 
     for (t in 1:(Tsubj[i])) {
+      // Weight of the gamble based on the sigmoidal function
       w_gamble  = 1 - (1/(1+exp(-k[i]*(cost[i, t] - p[i]))) - 1/(1+exp(k[i]*p[i]))) * (1+1/exp(k[i]*p[i]));
+
+      // Subjective value definition
       sv_gamble = w_gamble * (pow(gain[i, t], rho[i]) - lambda[i] * pow(loss[i, t], rho[i]));
+
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * sv_gamble);
     }
   }

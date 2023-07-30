@@ -57,8 +57,13 @@ model {
     real sv_gamble;
 
     for (t in 1:(Tsubj[i])) {
+      // weight based on the hyperbolic function
       w_gamble  = 1/(1 + k[i] * cost[i, t]);
+
+      // Subjective value definition
       sv_gamble = w_gamble * (pow(gain[i, t], rho[i]) - lambda[i] * pow(loss[i, t], rho[i]));
+      
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * sv_gamble);
     }
   }

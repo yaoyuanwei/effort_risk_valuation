@@ -54,8 +54,11 @@ model {
     real sv_two;
 
     for (t in 1:(Tsubj[i])) {
+      // Subjective values of the two options based on the parabolic function
       sv_one   = pow(amount_one[i, t], rho[i]) - k[i] * (cost_one[i, t]^2);
       sv_two   = pow(amount_two[i, t], rho[i]) - k[i] * (cost_two[i, t]^2);
+
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * (sv_one - sv_two));
     }
   }

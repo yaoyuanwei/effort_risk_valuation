@@ -41,7 +41,7 @@ transformed parameters {
 }
 
 model {
-// Hyperbolic function
+// Sigmoidal function
   // Hyperparameters
   mu_pr  ~ normal(0, 1);
   sigma  ~ normal(0, 0.2);
@@ -62,8 +62,12 @@ model {
     for (t in 1:(Tsubj[i])) {
     w_one   = (1 - (1/(1+exp(-k[i]*(cost_one[i, t] - p[i]))) - 1/(1+exp(k[i]*p[i]))) * (1+1/exp(k[i]*p[i])));
     w_two   = (1 - (1/(1+exp(-k[i]*(cost_two[i, t] - p[i]))) - 1/(1+exp(k[i]*p[i]))) * (1+1/exp(k[i]*p[i])));
+
+    // Subjective values of the two options based on the sigmoidal function
     sv_one  = w_one * pow(amount_one[i, t], rho[i]);
     sv_two  = w_two * pow(amount_two[i, t], rho[i]);
+
+    // Generate choices based subjective values
     choice[i, t] ~ bernoulli_logit(beta[i] * (sv_one - sv_two)); 
     }
   }

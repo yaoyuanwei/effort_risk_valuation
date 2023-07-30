@@ -54,8 +54,11 @@ model {
     real sv_two;
 
     for (t in 1:(Tsubj[i])) {
+      // Subjective values of the two options based on the hyperbolic function
       sv_one   = pow(amount_one[i, t], rho[i])/(1 + k[i] * cost_one[i, t]);
       sv_two   = pow(amount_two[i, t], rho[i])/(1 + k[i] * cost_two[i, t]);
+
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * (sv_one - sv_two));
     }
   }

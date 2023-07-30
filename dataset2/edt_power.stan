@@ -41,7 +41,7 @@ transformed parameters {
 }
 
 model {
-// Hyperbolic function
+// Two-parameter power function
   // Hyperparameters
   mu_pr  ~ normal(0, 1);
   sigma  ~ normal(0, 0.2);
@@ -58,8 +58,11 @@ model {
     real sv_two;
 
     for (t in 1:(Tsubj[i])) {
+      // Subjective values of the two options based on the power function
       sv_one   = pow(amount_one[i, t], rho[i]) - k[i] * pow(cost_one[i, t], p[i]);
       sv_two   = pow(amount_two[i, t], rho[i]) - k[i] * pow(cost_two[i, t], p[i]);
+
+      // Generate choices based subjective values
       choice[i, t] ~ bernoulli_logit(beta[i] * (sv_one - sv_two));
     }
   }
